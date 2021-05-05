@@ -35,9 +35,7 @@ entity main is
   Port (
     clk : in std_logic;
     reset: in std_logic;
-    hs, vs : out std_logic;
-    video_on : out std_logic;
-    column, row : out std_logic_vector(9 downto 0)
+    hs, vs : out std_logic
     );
 end main;
 
@@ -76,6 +74,8 @@ signal column_int : integer := 0;
 signal row_int : integer := 0;
 signal n_reset : std_logic;
 
+signal video_on : std_logic;
+    
 begin
     clock_div : clk_wiz_0
        port map ( 
@@ -103,7 +103,5 @@ begin
     );
     
     n_reset <= not reset;
-    column <= std_logic_vector(to_signed(column_int, column'length));
-    row <= std_logic_vector(to_signed(row_int, row'length));
 
 end Behavioral;

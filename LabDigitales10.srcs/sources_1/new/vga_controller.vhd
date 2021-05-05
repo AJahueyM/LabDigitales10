@@ -1,26 +1,3 @@
---------------------------------------------------------------------------------
---
---   FileName:         vga_controller.vhd
---   Dependencies:     none
---   Design Software:  Quartus II 64-bit Version 12.1 Build 177 SJ Full Version
---
---   HDL CODE IS PROVIDED "AS IS."  DIGI-KEY EXPRESSLY DISCLAIMS ANY
---   WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT
---   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
---   PARTICULAR PURPOSE, OR NON-INFRINGEMENT. IN NO EVENT SHALL DIGI-KEY
---   BE LIABLE FOR ANY INCIDENTAL, SPECIAL, INDIRECT OR CONSEQUENTIAL
---   DAMAGES, LOST PROFITS OR LOST DATA, HARM TO YOUR EQUIPMENT, COST OF
---   PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY OR SERVICES, ANY CLAIMS
---   BY THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF),
---   ANY CLAIMS FOR INDEMNITY OR CONTRIBUTION, OR OTHER SIMILAR COSTS.
---
---   Version History
---   Version 1.0 05/10/2013 Scott Larson
---     Initial Public Release
---   Version 1.1 03/07/2018 Scott Larson
---     Corrected two minor "off-by-one" errors
---    
---------------------------------------------------------------------------------
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
@@ -33,10 +10,10 @@ ENTITY vga_controller IS
     h_fp     : INTEGER := 16;    --horiztonal front porch width in pixels
     h_pol    : STD_LOGIC := '0';  --horizontal sync pulse polarity (1 = positive, 0 = negative)
     v_pulse  : INTEGER := 2;      --vertical sync pulse width in rows
-    v_bp     : INTEGER := 33;     --vertical back porch width in rows
+    v_bp     : INTEGER := 29;     --vertical back porch width in rows
     v_pixels : INTEGER := 480;   --vertical display width in rows
-    v_fp     : INTEGER := 10;      --vertical front porch width in rows
-    v_pol    : STD_LOGIC := '1'); --vertical sync pulse polarity (1 = positive, 0 = negative)
+    v_fp     : INTEGER := 11;      --vertical front porch width in rows
+    v_pol    : STD_LOGIC := '0'); --vertical sync pulse polarity (1 = positive, 0 = negative)
   PORT(
     pixel_clk : IN   STD_LOGIC;  --pixel clock at frequency of VGA mode being used
     reset_n   : IN   STD_LOGIC;  --active low asycnchronous reset
