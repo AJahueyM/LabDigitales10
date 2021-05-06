@@ -35,7 +35,8 @@ entity main is
   Port (
     clk : in std_logic;
     reset: in std_logic;
-    hs, vs : out std_logic
+    hs, vs : out std_logic;
+    red, green, blue : out std_logic_vector(0 to 3)
     );
 end main;
 
@@ -102,6 +103,10 @@ begin
         n_sync  => n_sync --sync-on-green output to DAC
     );
     
+    red <= "0000";
+    green <= "1111";
+    blue <= "0000";
+
     n_reset <= not reset;
 
 end Behavioral;
