@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.2.2 (64-bit)
+# SW Build 2348494 on Mon Oct  1 18:25:44 MDT 2018
+# IP Build 2318053 on Mon Oct  1 21:44:26 MDT 2018
+# Start of session at: Fri May  7 11:19:56 2021
+# Process ID: 5628
+# Current directory: C:/Users/L03068681/Downloads/LabDigitales10-main/LabDigitales10-main/LabDigitales10.runs/synth_1
+# Command line: vivado.exe -log main.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source main.tcl
+# Log file: C:/Users/L03068681/Downloads/LabDigitales10-main/LabDigitales10-main/LabDigitales10.runs/synth_1/main.vds
+# Journal file: C:/Users/L03068681/Downloads/LabDigitales10-main/LabDigitales10-main/LabDigitales10.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source main.tcl -notrace

@@ -1,9 +1,9 @@
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
+library ieee;
+use ieee.std_logic_1164.all;
 
-ENTITY vga_controller IS
-  GENERIC(
+entity vga_controller IS
+  generic(
     h_pulse  : INTEGER := 96;    --horiztonal sync pulse width in pixels
     h_bp     : INTEGER := 48;    --horiztonal back porch width in pixels
     h_pixels : INTEGER := 640;   --horiztonal display width in pixels
@@ -13,7 +13,7 @@ ENTITY vga_controller IS
     v_bp     : INTEGER := 29;     --vertical back porch width in rows
     v_pixels : INTEGER := 480;   --vertical display width in rows
     v_fp     : INTEGER := 11;      --vertical front porch width in rows
-    v_pol    : STD_LOGIC := '0'); --vertical sync pulse polarity (1 = positive, 0 = negative)
+    v_pol    : STD_LOGIC := '1'); --vertical sync pulse polarity (1 = positive, 0 = negative)
   PORT(
     pixel_clk : IN   STD_LOGIC;  --pixel clock at frequency of VGA mode being used
     reset_n   : IN   STD_LOGIC;  --active low asycnchronous reset

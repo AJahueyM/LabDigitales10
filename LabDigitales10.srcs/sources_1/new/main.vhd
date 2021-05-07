@@ -32,7 +32,7 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity main is
-  Port (
+  port (
     clk : in std_logic;
     reset: in std_logic;
     hs, vs : out std_logic;
@@ -65,7 +65,7 @@ component vga_controller IS
     row       : OUT  INTEGER;    --vertical pixel coordinate
     n_blank   : OUT  STD_LOGIC;  --direct blacking output to DAC
     n_sync    : OUT  STD_LOGIC); --sync-on-green output to DAC
-END component;
+end component;
 
 signal pixel_clock : std_logic := '0';
 signal div_locked : std_logic;
@@ -74,9 +74,8 @@ signal n_sync : std_logic;
 signal column_int : integer := 0;
 signal row_int : integer := 0;
 signal n_reset : std_logic;
-
 signal video_on : std_logic;
-    
+   
 begin
     clock_div : clk_wiz_0
        port map ( 
@@ -102,11 +101,68 @@ begin
         n_blank => n_blank,  --direct blacking output to DAC
         n_sync  => n_sync --sync-on-green output to DAC
     );
+        
+    process(video_on, row_int, column_int)
+    variable line_width : integer := 10;
+    begin
     
-    red <= "0000";
-    green <= "1111";
-    blue <= "0000";
-
+      if(video_on = '1') then        --display time
+        
+        if(
+            ( row_int >= 0 and row_int <= line_width) or
+            ( row_int >= 480 - line_width and row_int <= 480) or
+            ( column_int >= 240 - (line_width / 2) and column_int <= 240 + (line_width / 2)) or
+            ( row_int >= 240 - (line_width / 2) and row_int <= 240 + (line_width / 2))or
+            ( column_int >= 0 and column_int <= line_width) or
+            ( column_int >= 490 - line_width and column_int <= 490)
+        ) then
+            red <= (others => '1');
+            green  <= (others => '0');
+            blue <= (others => '0');  
+        else
+            red <= (others => '0');
+            green  <= (others => '0');
+            blue <= (others => '1');  
+        end if;
+      
+--        if(column_int >= 0 and column_int < 68) then
+--            red <= (others => '1');
+--            green  <= (others => '1');
+--            blue <= (others => '0');
+--        elsif(column_int >= 68 and column_int < 136 ) then
+--            red <= (others => '0');
+--            green  <= (others => '1');
+--            blue <= (others => '1');
+--        elsif(column_int >= 136 and column_int < 204 ) then
+--            red <= (others => '0');
+--            green  <= (others => '1');
+--            blue <= (others => '0');
+--        elsif(column_int >= 204 and column_int < 272 ) then
+--            red <= (others => '1');
+--            green  <= (others => '0');
+--            blue <= (others => '1');
+--        elsif(column_int >= 272 and column_int < 340 ) then
+--            red <= (others => '1');
+--            green  <= (others => '0');
+--            blue <= (others => '0');
+--        elsif(column_int >= 340 and column_int < 408 ) then
+--            red <= (others => '0');
+--            green  <= (others => '0');
+--            blue <= (others => '1');
+--        elsif(column_int >= 408 and column_int < 476 ) then
+--            red <= (others => '0');
+--            green  <= (others => '0');
+--            blue <= (others => '0');
+--        end if;
+             
+      else                           --blanking time
+           red <= (others => '0');
+           green <= (others => '0');
+           blue <= (others => '0');
+      end if;
+    
+    end process;
+    
     n_reset <= not reset;
 
 end Behavioral;
